@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Calculated</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="calc__wrapper">
+  <div class="calc">
+    <div class="calc__input">
+      <!--  type="number" - чтобы вводились только цифры -->
+      <input class="calc__field" type="number" placeholder="0">
+    </div>
+    <div class="calc__buttons">
+      <!--  clear - отчистить поле  -->
+      <!--  reset - сбросить все  -->
+      <!--  calc__button_num - цифры -->
+      <!--  calc__button_action - действия (оранжевые) -->
+      <!--  calc__other-action - действия (серые) -->
+      <!--  data-action - название действия -->
+
+      <button class="calc__button calc__button_other-action" type="button" data-action="clear">C</button>
+      <button class="calc__button calc__button_other-action" type="button" data-action="reset">AC</button>
+      <button class="calc__button calc__button_other-action" type="button" data-action="remainder">%</button>
+      <button class="calc__button calc__button_action" type="button" data-action="division">÷</button>
+
+      <button class="calc__button calc__button_num calc__button_7" type="button">7</button>
+      <button class="calc__button calc__button_num calc__button_8" type="button">8</button>
+      <button class="calc__button calc__button_num calc__button_9" type="button">9</button>
+      <button class="calc__button calc__button_action" type="button" data-action="multiply">×</button>
+
+      <button class="calc__button calc__button_num calc__button_4" type="button">4</button>
+      <button class="calc__button calc__button_num calc__button_5" type="button">5</button>
+      <button class="calc__button calc__button_num calc__button_6" type="button">6</button>
+      <button class="calc__button calc__button_action" type="button" data-action="subtracting">-</button>
+
+      <button class="calc__button calc__button_num calc__button_1" type="button">1</button>
+      <button class="calc__button calc__button_num calc__button_2" type="button">2</button>
+      <button class="calc__button calc__button_num calc__button_3" type="button">3</button>
+      <button class="calc__button calc__button_action" type="button" data-action="adding">+</button>
+
+      <button class="calc__button calc__button_num calc__button_0" type="button">0</button>
+      <button class="calc__button calc__button_action" type="button" data-action="equals">=</button>
+    </div>
+  </div>
+</div>
+
+<script src="js/script.js"></script>
+</body>
+</html>
