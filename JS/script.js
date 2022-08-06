@@ -14,6 +14,8 @@ window.addEventListener('DOMContentLoaded', () => {
   const reset = document.querySelector('[data-action="reset"]');
   const remainder = document.querySelector('[data-action="remainder"]');
 
+  let isClear = false
+
 
   let number1 = 0;
   let number2 = 0;
@@ -28,6 +30,10 @@ window.addEventListener('DOMContentLoaded', () => {
       if (action === '') {
         number1 += e.target.value;
       } else {
+        if (isClear) {
+          input.value = '';
+          isClear = false;
+        }
         number2 += e.target.value;
       }
       input.value += e.target.value;
@@ -52,13 +58,15 @@ window.addEventListener('DOMContentLoaded', () => {
   butActions.forEach((button) => {
     button.addEventListener('click', (e) => {
       action = e.target.value;
-      input.value += action;
+      isClear = true;
+      // input.value += action;
       console.log(action);
     });
   });
 
   // Действия
   equals.addEventListener('click', (e) => {
+    console.log(isClear);
     switch (action) {
       case '+' :
         result = +number1 + +number2;
@@ -67,6 +75,7 @@ window.addEventListener('DOMContentLoaded', () => {
         number2 = 0;
         break;
     }
+
     console.log(input.value)
 
   });
