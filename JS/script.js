@@ -31,7 +31,8 @@ window.addEventListener('DOMContentLoaded', () => {
         number2 += e.target.value;
       }
       input.value += e.target.value;
-      console.log();
+      console.log(number1);
+      console.log(number2);
     });
 
   });
@@ -42,9 +43,12 @@ window.addEventListener('DOMContentLoaded', () => {
     input.value = '';
     number1 = 0;
     number2 = 0;
-    console.log(number1);
+    action = '';
+    result = 0;
+    console.log(number2);
   });
 
+// добавляем действия в переменную
   butActions.forEach((button) => {
     button.addEventListener('click', (e) => {
       action = e.target.value;
@@ -52,6 +56,8 @@ window.addEventListener('DOMContentLoaded', () => {
       console.log(action);
     });
   });
+
+  // Действия
   equals.addEventListener('click', (e) => {
     switch (action) {
       case '+' :
@@ -59,6 +65,7 @@ window.addEventListener('DOMContentLoaded', () => {
         input.value = result;
         number1 = result;
         number2 = 0;
+        break;
     }
     console.log(input.value)
 
