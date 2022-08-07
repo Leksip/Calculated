@@ -22,6 +22,7 @@ window.addEventListener('DOMContentLoaded', () => {
   let result = 0;
 
 //добавляем ввод с клавиатуры
+//  нужно доделать
   input.addEventListener('input', (e) => {
     number = 0;
     number = e.target.value;
