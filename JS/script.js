@@ -24,6 +24,7 @@ window.addEventListener('DOMContentLoaded', () => {
 //добавляем ввод с клавиатуры
 //  нужно доделать
   input.addEventListener('input', (e) => {
+    // TODO перезапись number, на 28 строчке не нужно, удалить эту строку
     number = 0;
     number = e.target.value;
     console.log(number);
@@ -61,6 +62,7 @@ window.addEventListener('DOMContentLoaded', () => {
         preAction(action);
         action = e.target.value;
 
+        // TODO повторяющийся код (см. 99 строку)
       } else {
         action = '';
         action = e.target.value;
@@ -84,13 +86,17 @@ window.addEventListener('DOMContentLoaded', () => {
     action = '';
   });
 
+  // TODO не понятное название функции, переименовать (чтобы было понятно что она делает и сделать ее глаголом
   function preAction(arg) {
     arrNumbers.push(number);
+    // TODO 92 и 93 строки объединить (numberArr = arr.numbers.filter().map())
     arrNumbers = arrNumbers.filter(Number);
     let numberArr = arrNumbers.map(parseFloat);
     console.log(numberArr);
     switch (arg) {
         // сложение
+
+        // TODO в case много повторяющегося кода, вынести в отдельную функцию повторяющийся участок во всех case
       case '+' :
         result = numberArr.reduce((sum, numbers) => sum + numbers, 0);
         input.value = result;
