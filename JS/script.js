@@ -43,7 +43,7 @@ window.addEventListener('DOMContentLoaded', () => {
     arrNumbers.length = 0;
     action = '';
     result = 0;
-    number = 0;
+    number = '';
     console.log(arrNumbers);
   });
 
@@ -53,7 +53,7 @@ window.addEventListener('DOMContentLoaded', () => {
       action = '';
       action = e.target.value;
       arrNumbers.push(number);
-      number = 0;
+      number = '';
       isClear = true;
       console.log(action);
       console.log(arrNumbers);
@@ -63,6 +63,7 @@ window.addEventListener('DOMContentLoaded', () => {
   // Действия
   equals.addEventListener('click', (e) => {
     arrNumbers.push(number);
+    arrNumbers = arrNumbers.filter(Number)
     let numberArr = arrNumbers.map(parseFloat);
     console.log(numberArr);
     switch (action) {
@@ -72,7 +73,7 @@ window.addEventListener('DOMContentLoaded', () => {
         input.value = result;
         arrNumbers.length = 0;
         arrNumbers.push(result);
-        number = 0;
+        number = '';
         isClear = true;
         console.log(result);
         break;
@@ -82,7 +83,7 @@ window.addEventListener('DOMContentLoaded', () => {
         input.value = result;
         arrNumbers.length = 0;
         arrNumbers.push(result);
-        number = 0;
+        number = '';
         isClear = true;
         console.log(result);
         break;
@@ -93,7 +94,17 @@ window.addEventListener('DOMContentLoaded', () => {
         input.value = result;
         arrNumbers.length = 0;
         arrNumbers.push(result);
-        number = 0;
+        number = '';
+        isClear = true;
+        console.log(result);
+        break;
+        // деление
+      case '/' :
+        result = numberArr.reduce((sum, numbers) => sum / numbers);
+        input.value = result;
+        arrNumbers.length = 0;
+        arrNumbers.push(result);
+        number = '';
         isClear = true;
         console.log(result);
         break;
