@@ -21,7 +21,12 @@ window.addEventListener('DOMContentLoaded', () => {
   let action = '';
   let result = 0;
 
-
+//добавляем ввод с клавиатуры
+  input.addEventListener('input', (e) => {
+    number = 0;
+    number = e.target.value;
+    console.log(number);
+  });
 // добавляем цифры
   numbers.forEach((button) => {
     button.addEventListener('click', (e) => {
@@ -50,24 +55,40 @@ window.addEventListener('DOMContentLoaded', () => {
 // добавляем действия в переменную
   butActions.forEach((button) => {
     button.addEventListener('click', (e) => {
-      action = '';
-      action = e.target.value;
-      arrNumbers.push(number);
-      number = '';
-      isClear = true;
-      console.log(action);
-      console.log(arrNumbers);
+      if (action.length > 0) {
+        preAction(action);
+        action = e.target.value;
+
+      } else {
+        action = '';
+        action = e.target.value;
+        arrNumbers.push(number);
+        number = '';
+        isClear = true;
+        console.log(action);
+        console.log(arrNumbers);
+      }
     });
   });
 
   // Действия
+
   equals.addEventListener('click', (e) => {
+    // arrNumbers.push(number);
+    // arrNumbers = arrNumbers.filter(Number);
+    // let numberArr = arrNumbers.map(parseFloat);
+    // console.log(numberArr);
+    preAction(action);
+    action = '';
+  });
+
+  function preAction(arg) {
     arrNumbers.push(number);
-    arrNumbers = arrNumbers.filter(Number)
+    arrNumbers = arrNumbers.filter(Number);
     let numberArr = arrNumbers.map(parseFloat);
     console.log(numberArr);
-    switch (action) {
-      // сложение
+    switch (arg) {
+        // сложение
       case '+' :
         result = numberArr.reduce((sum, numbers) => sum + numbers, 0);
         input.value = result;
@@ -76,8 +97,9 @@ window.addEventListener('DOMContentLoaded', () => {
         number = '';
         isClear = true;
         console.log(result);
+        return result;
         break;
-      //  вычетание
+        //  вычетание
       case '-' :
         result = numberArr.reduce((sum, numbers) => sum - numbers);
         input.value = result;
@@ -86,6 +108,7 @@ window.addEventListener('DOMContentLoaded', () => {
         number = '';
         isClear = true;
         console.log(result);
+        return result;
         break;
 
         // умножение
@@ -97,6 +120,7 @@ window.addEventListener('DOMContentLoaded', () => {
         number = '';
         isClear = true;
         console.log(result);
+        return result;
         break;
         // деление
       case '/' :
@@ -107,10 +131,14 @@ window.addEventListener('DOMContentLoaded', () => {
         number = '';
         isClear = true;
         console.log(result);
+        return result;
         break;
     }
+  }
 
-    // console.log(result)
 
-  });
+  // console.log(result));
+
+
 });
+
