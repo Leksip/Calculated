@@ -37,6 +37,7 @@ window.addEventListener('DOMContentLoaded', () => {
       number += e.target.value;
       input.value += e.target.value;
       console.log(number);
+      console.log(arrNumbers);
     });
 
   });
@@ -98,7 +99,7 @@ window.addEventListener('DOMContentLoaded', () => {
         isClear = true;
         console.log(result);
         return result;
-        break;
+
         //  вычетание
       case '-' :
         result = numberArr.reduce((sum, numbers) => sum - numbers);
@@ -109,7 +110,7 @@ window.addEventListener('DOMContentLoaded', () => {
         isClear = true;
         console.log(result);
         return result;
-        break;
+
 
         // умножение
       case '*' :
@@ -121,7 +122,7 @@ window.addEventListener('DOMContentLoaded', () => {
         isClear = true;
         console.log(result);
         return result;
-        break;
+
         // деление
       case '/' :
         result = numberArr.reduce((sum, numbers) => sum / numbers);
@@ -132,7 +133,7 @@ window.addEventListener('DOMContentLoaded', () => {
         isClear = true;
         console.log(result);
         return result;
-        break;
+
     }
   }
 
