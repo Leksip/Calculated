@@ -89,8 +89,11 @@ window.addEventListener('DOMContentLoaded', () => {
   // TODO не понятное название функции, переименовать (чтобы было понятно что она делает и сделать ее глаголом
   function preAction(arg) {
     arrNumbers.push(number);
-    // TODO 92 и 93 строки объединить (numberArr = arr.numbers.filter().map())
+    // TODO 95 и 97 строки объединить (numberArr = arr.numbers.filter().map())
+
+    // TODO на 95 строке чуть не понятно, лучше писать так arrNumbers.filter(num => typeof(num) === 'number')
     arrNumbers = arrNumbers.filter(Number);
+    // TODO на 97 строке тоже map чуть не так написан (arrNumbers.map(num => +num));
     let numberArr = arrNumbers.map(parseFloat);
     console.log(numberArr);
     switch (arg) {
@@ -109,6 +112,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
         //  вычетание
       case '-' :
+        // TODO посмотреть чтобы в reduce был не numbers, а number (т.к. это не все число, а конкретно чилсо в переборе)
         result = numberArr.reduce((sum, numbers) => sum - numbers);
         input.value = result;
         arrNumbers.length = 0;
