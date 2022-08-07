@@ -14,11 +14,10 @@ window.addEventListener('DOMContentLoaded', () => {
   const reset = document.querySelector('[data-action="reset"]');
   const remainder = document.querySelector('[data-action="remainder"]');
 
-  let isClear = false
+  let isClear = false;
+  let number = 0;
 
-
-  let number1 = 0;
-  let number2 = 0;
+  let arrNumbers = [];
   let action = '';
   let result = 0;
 
@@ -26,19 +25,13 @@ window.addEventListener('DOMContentLoaded', () => {
 // добавляем цифры
   numbers.forEach((button) => {
     button.addEventListener('click', (e) => {
-
-      if (action === '') {
-        number1 += e.target.value;
-      } else {
-        if (isClear) {
-          input.value = '';
-          isClear = false;
-        }
-        number2 += e.target.value;
+      if (isClear) {
+        input.value = '';
+        isClear = false;
       }
+      number += e.target.value;
       input.value += e.target.value;
-      console.log(number1);
-      console.log(number2);
+      console.log(number);
     });
 
   });
@@ -47,36 +40,66 @@ window.addEventListener('DOMContentLoaded', () => {
 // очистить строку
   reset.addEventListener('click', () => {
     input.value = '';
-    number1 = 0;
-    number2 = 0;
+    arrNumbers.length = 0;
     action = '';
     result = 0;
-    console.log(number2);
+    number = 0;
+    console.log(arrNumbers);
   });
 
 // добавляем действия в переменную
   butActions.forEach((button) => {
     button.addEventListener('click', (e) => {
+      action = '';
       action = e.target.value;
+      arrNumbers.push(number);
+      number = 0;
       isClear = true;
-      // input.value += action;
       console.log(action);
+      console.log(arrNumbers);
     });
   });
 
   // Действия
   equals.addEventListener('click', (e) => {
-    console.log(isClear);
+    arrNumbers.push(number);
+    let numberArr = arrNumbers.map(parseFloat);
+    console.log(numberArr);
     switch (action) {
+      // сложение
       case '+' :
-        result = +number1 + +number2;
+        result = numberArr.reduce((sum, numbers) => sum + numbers, 0);
         input.value = result;
-        number1 = result;
-        number2 = 0;
+        arrNumbers.length = 0;
+        arrNumbers.push(result);
+        number = 0;
+        isClear = true;
+        console.log(result);
+        break;
+      //  вычетание
+      case '-' :
+        result = numberArr.reduce((sum, numbers) => sum - numbers);
+        input.value = result;
+        arrNumbers.length = 0;
+        arrNumbers.push(result);
+        number = 0;
+        isClear = true;
+        console.log(result);
+        break;
+
+        // умножение
+      case '*' :
+        result = numberArr.reduce((sum, numbers) => sum * numbers);
+        input.value = result;
+        arrNumbers.length = 0;
+        arrNumbers.push(result);
+        number = 0;
+        isClear = true;
+        console.log(result);
         break;
     }
 
-    console.log(input.value)
+    // console.log(result)
 
   });
 });
