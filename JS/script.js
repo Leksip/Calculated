@@ -21,14 +21,32 @@ window.addEventListener('DOMContentLoaded', () => {
   let action = '';
   let result = 0;
 
+  //получаем результат после нажатия равно(=)
+  function getOutput() {
+    input.value = result;
+    arrNumbers.length = 0;
+    arrNumbers.push(result);
+    number = '';
+    isClear = true;
+    console.log(result);
+    return result;
+  }
+  // возвращаем цвет кнопки
+  function returnActionColor(){
+
+    for (let i = 0; i <= 3; i++) {
+      butActions[i].classList.remove('calc__button_active')
+      butActions[i].classList.add("calc__button_action")
+    }
+}
+
+
 //добавляем ввод с клавиатуры
-//  нужно доделать
   input.addEventListener('input', (e) => {
-    // TODO перезапись number, на 28 строчке не нужно, удалить эту строку
-    number = 0;
     number = e.target.value;
     console.log(number);
   });
+
 // добавляем цифры
   numbers.forEach((button) => {
     button.addEventListener('click', (e) => {
@@ -44,7 +62,6 @@ window.addEventListener('DOMContentLoaded', () => {
 
   });
 
-
 // очистить строку
   reset.addEventListener('click', () => {
     input.value = '';
@@ -52,17 +69,22 @@ window.addEventListener('DOMContentLoaded', () => {
     action = '';
     result = 0;
     number = '';
+    returnActionColor();
     console.log(arrNumbers);
   });
 
 // добавляем действия в переменную
   butActions.forEach((button) => {
     button.addEventListener('click', (e) => {
-      if (action.length > 0) {
-        preAction(action);
-        action = e.target.value;
 
-        // TODO повторяющийся код (см. 99 строку)
+      returnActionColor();
+      button.classList.remove('calc__button_action');
+      button.classList.add("calc__button_active");
+       // changeColorAction(button);
+      console.log(e.target)
+      if (action.length > 0) {
+        getResult(action);
+        action = e.target.value;
       } else {
         action = '';
         action = e.target.value;
@@ -75,82 +97,43 @@ window.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Действия
-
+  // Действия(равно)
   equals.addEventListener('click', (e) => {
-    // arrNumbers.push(number);
-    // arrNumbers = arrNumbers.filter(Number);
-    // let numberArr = arrNumbers.map(parseFloat);
-    // console.log(numberArr);
-    preAction(action);
+    returnActionColor();
+    getResult(action);
     action = '';
   });
 
-  // TODO не понятное название функции, переименовать (чтобы было понятно что она делает и сделать ее глаголом
-  function preAction(arg) {
+  function getResult(arg) {
     arrNumbers.push(number);
-    // TODO 95 и 97 строки объединить (numberArr = arr.numbers.filter().map())
-
-    // TODO на 95 строке чуть не понятно, лучше писать так arrNumbers.filter(num => typeof(num) === 'number')
-    arrNumbers = arrNumbers.filter(Number);
-    // TODO на 97 строке тоже map чуть не так написан (arrNumbers.map(num => +num));
-    let numberArr = arrNumbers.map(parseFloat);
+    let numberArr = arrNumbers.map(num => +num).filter(num => typeof (num) === 'number');
     console.log(numberArr);
     switch (arg) {
-        // сложение
 
-        // TODO в case много повторяющегося кода, вынести в отдельную функцию повторяющийся участок во всех case
+        // сложение
       case '+' :
-        result = numberArr.reduce((sum, numbers) => sum + numbers, 0);
-        input.value = result;
-        arrNumbers.length = 0;
-        arrNumbers.push(result);
-        number = '';
-        isClear = true;
-        console.log(result);
-        return result;
+        result = numberArr.reduce((sum, number) => sum + number, 0);
+        getOutput();
+        break;
 
         //  вычетание
       case '-' :
-        // TODO посмотреть чтобы в reduce был не numbers, а number (т.к. это не все число, а конкретно чилсо в переборе)
-        result = numberArr.reduce((sum, numbers) => sum - numbers);
-        input.value = result;
-        arrNumbers.length = 0;
-        arrNumbers.push(result);
-        number = '';
-        isClear = true;
-        console.log(result);
-        return result;
-
+        result = numberArr.reduce((sum, number) => sum - number);
+        getOutput();
+        break;
 
         // умножение
       case '*' :
-        result = numberArr.reduce((sum, numbers) => sum * numbers);
-        input.value = result;
-        arrNumbers.length = 0;
-        arrNumbers.push(result);
-        number = '';
-        isClear = true;
-        console.log(result);
-        return result;
+        result = numberArr.reduce((sum, number) => sum * number);
+        getOutput();
+        break;
 
         // деление
       case '/' :
-        result = numberArr.reduce((sum, numbers) => sum / numbers);
-        input.value = result;
-        arrNumbers.length = 0;
-        arrNumbers.push(result);
-        number = '';
-        isClear = true;
-        console.log(result);
-        return result;
-
+        result = numberArr.reduce((sum, number) => sum / number);
+        getOutput();
+        break;
     }
   }
-
-
-  // console.log(result));
-
-
 });
 

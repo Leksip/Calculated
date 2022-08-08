@@ -26,6 +26,8 @@ body {
     grid-template-columns: repeat(4, 1fr);
 }
 
+
+
 .calc__button {
     border-radius: 55px;
     height: 55px;
@@ -56,8 +58,9 @@ body {
     background: #d19434;
 }
 
-.calc__button_action:active {
-    background: rgba(255, 159, 10, 0.8);
+.calc__button_active {
+    background:white;
+    color: orange;
 }
 
 .calc__button_other-action {
