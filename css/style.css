@@ -59,8 +59,8 @@ body {
 }
 
 .calc__button_active {
-    background:white;
-    color: orange;
+    background:white !important;
+    color: orange !important;
 }
 
 .calc__button_other-action {

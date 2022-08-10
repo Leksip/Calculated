@@ -15,6 +15,7 @@ window.addEventListener('DOMContentLoaded', () => {
   const remainder = document.querySelector('[data-action="remainder"]');
 
   let isClear = false;
+  let isNewCalculation = false;
   let number = 0;
 
   let arrNumbers = [];
@@ -28,60 +29,91 @@ window.addEventListener('DOMContentLoaded', () => {
     arrNumbers.push(result);
     number = '';
     isClear = true;
-    console.log(result);
     return result;
   }
+
   // возвращаем цвет кнопки
-  function returnActionColor(){
+  function returnActionColor() {
 
     for (let i = 0; i <= 3; i++) {
-      butActions[i].classList.remove('calc__button_active')
-      butActions[i].classList.add("calc__button_action")
+      butActions[i].classList.remove('calc__button_active');
+      butActions[i].classList.add('calc__button_action');
     }
-}
+  }
 
 
 //добавляем ввод с клавиатуры
   input.addEventListener('input', (e) => {
     number = e.target.value;
-    console.log(number);
+  });
+
+  //удаление ч\з backspace
+  document.addEventListener('keydown', (e) => {
+    if (e.code === 'Backspace') {
+      number = number.slice(0, -1);
+      input.value = number;
+    }
   });
 
 // добавляем цифры
   numbers.forEach((button) => {
     button.addEventListener('click', (e) => {
+      if (isNewCalculation) {
+        arrNumbers.length = 0;
+      }
       if (isClear) {
         input.value = '';
         isClear = false;
       }
       number += e.target.value;
       input.value += e.target.value;
-      console.log(number);
-      console.log(arrNumbers);
     });
 
   });
 
-// очистить строку
-  reset.addEventListener('click', () => {
+
+// полный сброс
+  function allReset() {
     input.value = '';
     arrNumbers.length = 0;
     action = '';
     result = 0;
     number = '';
     returnActionColor();
-    console.log(arrNumbers);
+  }
+
+  reset.addEventListener('click', () => {
+    allReset();
   });
 
+//  очищаем последний ввод
+  clear.addEventListener('click', () => {
+    if (isClear) {
+      allReset();
+      isClear = false;
+    }
+    input.value = '';
+    number = '';
+  });
+
+//  процент
+  remainder.addEventListener('click', () => {
+    if (isClear) {
+      arrNumbers.length = 0;
+      number = result / 100;
+      input.value = number;
+    } else {
+      number = number / 100;
+      input.value = number;
+    }
+  });
 // добавляем действия в переменную
   butActions.forEach((button) => {
     button.addEventListener('click', (e) => {
-
       returnActionColor();
       button.classList.remove('calc__button_action');
-      button.classList.add("calc__button_active");
-       // changeColorAction(button);
-      console.log(e.target)
+      button.classList.add('calc__button_active');
+      isNewCalculation = false;
       if (action.length > 0) {
         getResult(action);
         action = e.target.value;
@@ -91,23 +123,22 @@ window.addEventListener('DOMContentLoaded', () => {
         arrNumbers.push(number);
         number = '';
         isClear = true;
-        console.log(action);
-        console.log(arrNumbers);
       }
     });
   });
 
+
   // Действия(равно)
-  equals.addEventListener('click', (e) => {
+  equals.addEventListener('click', () => {
     returnActionColor();
+    isNewCalculation = true;
     getResult(action);
     action = '';
   });
 
   function getResult(arg) {
     arrNumbers.push(number);
-    let numberArr = arrNumbers.map(num => +num).filter(num => typeof (num) === 'number');
-    console.log(numberArr);
+    let numberArr = arrNumbers.filter(num => num).map(num => +num).filter(num => typeof (num) === 'number');
     switch (arg) {
 
         // сложение
