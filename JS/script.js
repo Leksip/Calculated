@@ -16,14 +16,19 @@ window.addEventListener('DOMContentLoaded', () => {
 
   let isClear = false;
   let isNewCalculation = false;
-  let number = 0;
+  let number = '';
 
   let arrNumbers = [];
   let action = '';
   let result = 0;
 
+
   //получаем результат после нажатия равно(=)
   function getOutput() {
+    if (result === Infinity) {
+      alert('Делить на 0 нельзя');
+      return;
+    }
     input.value = result;
     arrNumbers.length = 0;
     arrNumbers.push(result);
@@ -58,6 +63,9 @@ window.addEventListener('DOMContentLoaded', () => {
 // добавляем цифры
   numbers.forEach((button) => {
     button.addEventListener('click', (e) => {
+      if (number[0] === '0') {
+        input.value = '';
+      }
       if (isNewCalculation) {
         arrNumbers.length = 0;
       }
